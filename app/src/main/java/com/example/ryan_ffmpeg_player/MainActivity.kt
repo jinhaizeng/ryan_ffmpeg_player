@@ -43,20 +43,21 @@ class MainActivity : AppCompatActivity() {
 
     private fun decode() {
         val path = "/sdcard/DCIM/Camera";
-        val fileName = "share_fe91b7596d0f78b5089dd5ba1c946bce.mp4";
+        val fileName = "test.mp4";
         val input = File(
-            path,
+            Environment.getExternalStorageDirectory(),
             fileName
         ).absolutePath
         Log.e(TAG, "path" + Environment.getExternalStorageDirectory())
 
         val output = File(
-            path,
+            Environment.getExternalStorageDirectory(),
              "share_fe91b7596d0f78b5089dd5ba1c946bce_output_1280x720_yuv420p.yuv"
         ).absolutePath
 
         Log.e(TAG, "input = $input ${File(input).exists()}")
 
         VideoUtil.decode(input, output)
+        VideoUtil.helloNDK()
     }
 }

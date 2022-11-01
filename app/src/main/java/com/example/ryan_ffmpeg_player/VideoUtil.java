@@ -27,4 +27,6 @@ public class VideoUtil {
      */
     public native static void decode(String input, String output);
 
+    public native static void helloNDK();
+
 }

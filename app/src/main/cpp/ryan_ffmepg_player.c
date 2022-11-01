@@ -21,7 +21,6 @@ JNIEXPORT void JNICALL Java_com_example_ryan_1ffmpeg_1player_VideoUtil_decode
 //需要转码的视频文件(输入的视频文件)
 const char* input_cstr = (*env)->GetStringUTFChars(env,input_jstr,NULL);
 const char* output_cstr = (*env)->GetStringUTFChars(env,output_jstr,NULL);
-const char TAG = "ryan_test";
 ////1.注册所有组件
 //av_register_all();
 
@@ -29,16 +28,17 @@ const char TAG = "ryan_test";
 AVFormatContext *pFormatCtx = avformat_alloc_context();
 
 //2.打开输入视频文件
-if (avformat_open_input(&pFormatCtx, input_cstr, NULL, NULL) != 0)
+const int openResult = avformat_open_input(&pFormatCtx, input_cstr, NULL, NULL);
+if (openResult!= 0)
 {
-LOGE(TAG+"%s","无法打开输入视频文件");
+LOGE("%s%s%d","无法打开输入视频文件", input_cstr, openResult);
 return;
 }
 
 //3.获取视频文件信息
 if (avformat_find_stream_info(pFormatCtx,NULL) < 0)
 {
-LOGE(TAG+"%s","无法获取视频文件信息");
+LOGE("%s","无法获取视频文件信息");
 return;
 }
 
@@ -59,7 +59,7 @@ break;
 
 if (v_stream_idx == -1)
 {
-LOGE(TAG+"%s","找不到视频流\n");
+LOGE("%s","找不到视频流\n");
 return;
 }
 
@@ -71,7 +71,7 @@ AVCodec *pCodec = avcodec_find_decoder(pCodecCtx->codec_id);
 //（迅雷看看，找不到解码器，临时下载一个解码器）
 if (pCodec == NULL)
 {
-LOGE(TAG+"%s","找不到解码器\n");
+LOGE("%s","找不到解码器\n");
 return;
 }
 
@@ -173,3 +173,8 @@ avcodec_close(pCodecCtx);
 avformat_free_context(pFormatCtx);
 }
 
+
+JNIEXPORT void JNICALL
+Java_com_example_ryan_1ffmpeg_1player_VideoUtil_helloNDK(JNIEnv *env, jclass clazz) {
+    LOGE("编码器配置： %s",avcodec_configuration());
+}

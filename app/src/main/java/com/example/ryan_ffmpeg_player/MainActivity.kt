@@ -1,13 +1,21 @@
 package com.example.ryan_ffmpeg_player
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.ryan_ffmpeg_player.Constant.TAG
 import com.example.ryan_ffmpeg_player.databinding.ActivityMainBinding
 import java.io.File
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,12 +23,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Example of a call to a native method
-//        binding.sampleText.text = stringFromJNI()
+        PermissionUtils.requestMyPermissions(this)
     }
 
     override fun onResume() {
@@ -43,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun decode() {
         val path = "/sdcard/DCIM/Camera";
-        val fileName = "test.mp4";
+        val fileName = "DCIM/ScreenRecorder/Screenrecorder-2022-11-09-10-52-55-338.mp4";
         val input = File(
             Environment.getExternalStorageDirectory(),
             fileName
@@ -52,10 +57,23 @@ class MainActivity : AppCompatActivity() {
 
         val output = File(
             Environment.getExternalStorageDirectory(),
-             "share_fe91b7596d0f78b5089dd5ba1c946bce_output_1280x720_yuv420p.yuv"
+             "test_yuv420p.yuv"
         ).absolutePath
 
-        Log.e(TAG, "input = $input ${File(input).exists()}")
+        val outputFile = File(output)
+        if (outputFile.exists()){
+            outputFile.delete();
+        }
+        try {
+            //创建文件
+            val createResult = outputFile.createNewFile();
+            //给一个吐司提示，提示创建成功
+        } catch (e: Exception) {
+            e.printStackTrace();
+            Log.e(TAG, "output e" + e)
+
+        }
+        Log.e(TAG, "input = $input ${File(input).exists()}, output = $output ${File(output).exists()}")
 
         VideoUtil.decode(input, output)
         VideoUtil.helloNDK()

@@ -4,9 +4,10 @@ import android.content.Context
 import android.graphics.PixelFormat
 import android.util.AttributeSet
 import android.view.Surface
+import android.view.SurfaceHolder
 import android.view.SurfaceView
 
-class VideoView: SurfaceView {
+class VideoSurfaceView: SurfaceView, SurfaceHolder.Callback {
     constructor(context: Context) : super(context) {}
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -14,20 +15,6 @@ class VideoView: SurfaceView {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
-
-    private fun init() {
-        val holder = holder
-        holder.setFormat(PixelFormat.RGBA_8888)
-    }
-
-    external fun render(input: String, surface: Surface)
-
-    fun player(input: String) {
-        Thread(Runnable {
-            //        绘制功能 不需要交给SurfaveView        VideoView.this.getHolder().getSurface()
-            render(input, this@VideoView.holder.surface)
-        }).start()
-    }
 
     companion object {
         init {
@@ -45,4 +32,32 @@ class VideoView: SurfaceView {
             System.loadLibrary("ryan_ffmpeg_player")
         }
     }
+
+    private fun init() {
+        val holder = holder
+        holder.setFormat(PixelFormat.RGBA_8888)
+    }
+
+    external fun render(input: String, surface: Surface)
+
+    fun player(input: String) {
+        Thread(Runnable {
+            //        绘制功能 不需要交给SurfaveView        VideoView.this.getHolder().getSurface()
+            render(input, this@VideoSurfaceView.holder.surface)
+        }).start()
+    }
+
+    override fun surfaceCreated(holder: SurfaceHolder) {
+        TODO("Not yet implemented")
+    }
+
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun surfaceDestroyed(holder: SurfaceHolder) {
+        TODO("Not yet implemented")
+    }
+
+
 }

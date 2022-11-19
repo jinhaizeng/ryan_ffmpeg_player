@@ -130,6 +130,7 @@ target_link_libraries(
         postproc
         swresample
         swscale
+        android
 
         ${log-lib}
 )

@@ -1,36 +1,34 @@
 package com.example.ryan_ffmpeg_player
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.provider.Settings
 import android.util.Log
-import android.widget.TextView
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.widget.Button
 import com.example.ryan_ffmpeg_player.Constant.TAG
-import com.example.ryan_ffmpeg_player.databinding.ActivityMainBinding
 import java.io.File
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMainBinding
+    lateinit var playButton: Button
+    lateinit var videoView: VideoView
+    // TODO 这里要改下路径
+    val input = File(Environment.getExternalStorageDirectory(), "DCIM/ScreenRecorder/Screenrecorder-2022-11-09-10-52-55-338.mp4").absolutePath!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+
+        Log.d(TAG, "输入文件路径是否正常：" + File(input).exists())
         PermissionUtils.requestMyPermissions(this)
+        playButton = findViewById(R.id.playButton)
+        videoView = findViewById(R.id.videoView)
+        playButton.setOnClickListener {  videoView.player(input) }
     }
 
     override fun onResume() {
         super.onResume()
-        decode();
+//        decode();
     }
 
 //    /**

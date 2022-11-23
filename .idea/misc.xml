@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1789568345323741" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/activity_video_player.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/xml/fraction.xml" value="0.25885416666666666" />
       </map>
     </option>
   </component>

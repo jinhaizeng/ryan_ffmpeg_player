@@ -1,62 +1,43 @@
 package com.example.ryan_ffmpeg_player
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
-import android.widget.TextView
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.ryan_ffmpeg_player.Constant.TAG
-import com.example.ryan_ffmpeg_player.databinding.ActivityMainBinding
+import com.example.ryan_ffmpeg_player.Utils.FileUtils
 import java.io.File
+import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    lateinit var jumpVideoButton: Button
 
-    private lateinit var binding: ActivityMainBinding
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult -> {
+        }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Example of a call to a native method
-//        binding.sampleText.text = stringFromJNI()
+        PermissionUtils.requestMyPermissions(this)
+        jumpVideoButton = findViewById(R.id.jump_video)
+        jumpVideoButton.setOnClickListener(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        decode();
-    }
-
-//    /**
-//     * A native method that is implemented by the 'ryan_ffmpeg_player' native library,
-//     * which is packaged with this application.
-//     */
-//    external fun stringFromJNI(): String
-
-//    companion object {
-//        // Used to load the 'ryan_ffmpeg_player' library on application startup.
-//        init {
-//            System.loadLibrary("ryan_ffmpeg_player")
-//        }
-//    }
-
-    private fun decode() {
-        val path = "/sdcard/DCIM/Camera";
-        val fileName = "share_fe91b7596d0f78b5089dd5ba1c946bce.mp4";
-        val input = File(
-            path,
-            fileName
-        ).absolutePath
-        Log.e(TAG, "path" + Environment.getExternalStorageDirectory())
-
-        val output = File(
-            path,
-             "share_fe91b7596d0f78b5089dd5ba1c946bce_output_1280x720_yuv420p.yuv"
-        ).absolutePath
-
-        Log.e(TAG, "input = $input ${File(input).exists()}")
-
-        VideoUtil.decode(input, output)
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.jump_video -> {
+                val intent = Intent().setAction("video_player")
+                launcher.launch(intent)
+            }
+        }
     }
 }

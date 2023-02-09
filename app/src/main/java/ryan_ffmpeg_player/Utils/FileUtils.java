@@ -1,4 +1,4 @@
-package com.example.ryan_ffmpeg_player.Utils;
+package ryan_ffmpeg_player.Utils;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

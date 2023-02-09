@@ -23,7 +23,7 @@
         android:theme="@style/Theme.Ryan_ffmpeg_player"
         tools:targetApi="31">
         <activity
-            android:name=".VideoPlayerActivity"
+            android:name="ryan_ffmpeg_player.VideoPlayerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="video_player" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="ryan_ffmpeg_player.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

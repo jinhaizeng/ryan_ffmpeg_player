@@ -1,4 +1,4 @@
-package com.example.ryan_ffmpeg_player
+package ryan_ffmpeg_player
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.ryan_ffmpeg_player.Constant.TAG
-import com.example.ryan_ffmpeg_player.Utils.FileUtils
+import com.example.ryan_ffmpeg_player.R
+import ryan_ffmpeg_player.Constant.TAG
+import ryan_ffmpeg_player.Utils.FileUtils
 import java.io.File
 import java.lang.Exception
 

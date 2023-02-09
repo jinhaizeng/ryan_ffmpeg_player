@@ -1,19 +1,12 @@
-package com.example.ryan_ffmpeg_player
+package ryan_ffmpeg_player
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.ryan_ffmpeg_player.Constant.TAG
-import com.example.ryan_ffmpeg_player.Utils.FileUtils
-import java.io.File
-import java.lang.Exception
+import com.example.ryan_ffmpeg_player.R
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var jumpVideoButton: Button

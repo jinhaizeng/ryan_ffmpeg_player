@@ -1,4 +1,4 @@
-package com.example.ryan_ffmpeg_player
+package ryan_ffmpeg_player
 
 import android.Manifest
 import android.app.Activity

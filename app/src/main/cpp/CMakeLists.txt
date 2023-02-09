@@ -21,7 +21,11 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        ryan_ffmepg_player.c)
+        ryan_ffmepg_player.c
+        ff_player_jni.c
+        FFMpegMediaPlayer_jni.c)
+
+#INCLUDE_DIRECTORIES(./Headers)
 
 # 获取目录上一级的做法
 # https://cloud.tencent.com/developer/ask/sof/46411

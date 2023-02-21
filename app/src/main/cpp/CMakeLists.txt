@@ -14,6 +14,9 @@ project("ryan_ffmpeg_player")
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
+# 查找source目录下的所有*.cpp,*.c源文件,并将文件列表保存到 DIR_LIB_SRCS 变量
+file(GLOB_RECURSE SRC_DIR_LIST "media/player/*.cpp" "media/player/*.c", "./*.cpp", "JniBase/*.cpp")
+
 add_library( # Sets the name of the library.
         ryan_ffmpeg_player
 
@@ -22,10 +25,11 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         ryan_ffmepg_player.c
-        ff_player_jni.c
-        FFMpegMediaPlayer_jni.c)
+        ${SRC_DIR_LIST})
 
-#INCLUDE_DIRECTORIES(./Headers)
+INCLUDE_DIRECTORIES(
+        ./media/player
+        ./JniBase)
 
 # 获取目录上一级的做法
 # https://cloud.tencent.com/developer/ask/sof/46411

@@ -6,5 +6,6 @@
 #define RYAN_FFMPEG_PLAYER_FFMPEGMEDIAPLAYER_JNI_H
 
 #include <jni.h>
+#include <FFMedialPlayer.h>
 
 #endif //RYAN_FFMPEG_PLAYER_FFMPEGMEDIAPLAYER_JNI_H

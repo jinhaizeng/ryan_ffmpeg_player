@@ -7,8 +7,11 @@
 
 #include "FFMediaConfig.h"
 #include <string>
-#include <libavformat/avformat.h>
 #include <JniBase.h>
+
+extern "C" {
+#include <libavformat/avformat.h>
+}
 
 using namespace std;
 class FFMediaPlayer {

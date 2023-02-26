@@ -24,7 +24,6 @@ int FFMediaPlayer::stream_open() {
         ALOGE("avformat_open_input error, ret: %d", ret);
         return -1;
     }
-    
 
 }
 

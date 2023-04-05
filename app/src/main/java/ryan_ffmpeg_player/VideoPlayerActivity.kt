@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.ryan_ffmpeg_player.R
 import ryan_ffmpeg_player.Constant.TAG
+import ryan_ffmpeg_player.media.FFMediaPlayer
 import ryan_ffmpeg_player.utils.FileUtils
 import java.io.File
 import java.lang.Exception
@@ -49,12 +50,13 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.playButton -> {
-                if (!filePath.isEmpty()) {
-                    Log.d(TAG, "输入文件路径是否正常：" + File(filePath).exists())
-                    videoSurfaceView.player(filePath)
-                } else {
-                    Toast.makeText(this, "文件路径异常：" + filePath, Toast.LENGTH_LONG).show()
-                }
+//                if (!filePath.isEmpty()) {
+//                    Log.d(TAG, "输入文件路径是否正常：" + File(filePath).exists())
+//                    videoSurfaceView.player(filePath)
+//                } else {
+//                    Toast.makeText(this, "文件路径异常：" + filePath, Toast.LENGTH_LONG).show()
+//                }
+                FFMediaPlayer().native_setup();
             }
             R.id.sys_choose_image -> {
                 // 图片选image/* 视频选video/*
@@ -95,7 +97,7 @@ class VideoPlayerActivity : AppCompatActivity(), View.OnClickListener {
             "input = $input ${File(input).exists()}, output = $output ${File(output).exists()}"
         )
 
-        VideoUtil.decode(input, output)
-        VideoUtil.helloNDK()
+//        VideoUtil.decode(input, output)
+//        VideoUtil.helloNDK()
     }
 }

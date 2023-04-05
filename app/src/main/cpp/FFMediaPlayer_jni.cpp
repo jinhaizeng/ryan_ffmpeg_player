@@ -14,6 +14,7 @@
 #include <FFMedialPlayer_java.h>
 #include <FFMediaPlayer.h>
 #include <string>
+#include "libSDL2/SDL_thread.h"
 
 #define LOGI(FORMAT, ...) __android_log_print(ANDROID_LOG_INFO,"ryan_test",FORMAT,##__VA_ARGS__);
 #define LOGE(FORMAT, ...) __android_log_print(ANDROID_LOG_ERROR,"ryan_test",FORMAT,##__VA_ARGS__);
@@ -22,8 +23,18 @@
 // Created by Ryan on 2023/2/2.
 //
 
+int my_thread( void *data )
+{
+    //当程序还未结束
+    LOGE("Hello from C++");
+
+    return 0;
+}
 extern "C" JNIEXPORT void JNICALL
-Java_ryan_1ffmpeg_1player_media_FFMediaPlayer_native_1setup(JNIEnv *env, jobject jObject) {
+Java_ryan_1ffmpeg_1player_media_FFMediaPlayer__1native_1setup(JNIEnv *env, jobject jObject) {
+
+    SDL_CreateThread(my_thread, "my_thread", NULL);
+
     loadClass_FFMediaPlayer(env);
     FFMediaPlayer player;
     // weakRef这里为什么要用弱引用

@@ -61,6 +61,13 @@ find_library( # Sets the name of the path variable.
         # you want CMake to locate.
         log)
 
+# 导入SDL2的so
+add_library(SDL2 SHARED IMPORTED)
+set_target_properties(SDL2
+        PROPERTIES IMPORTED_LOCATION
+        ${third_part_lib_path}/libSDL2.so)
+
+
 # 导入 ffmpeg 相关的动态库
 # 1、导入 avcodec
 # add_library
@@ -139,6 +146,7 @@ target_link_libraries(
         swresample
         swscale
         android
+        SDL2
 
         ${log-lib}
 )

@@ -1,5 +1,7 @@
 package ryan_ffmpeg_player.media;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 
 public class FFMediaPlayer {
@@ -16,7 +18,6 @@ public class FFMediaPlayer {
 
         // 这个是我们自己 CMakeLists.txt 脚本编译生成的库
         System.loadLibrary("ryan_ffmpeg_player");
-
 //        System.loadLibrary("ryan_ffmepg_player");
     }
 

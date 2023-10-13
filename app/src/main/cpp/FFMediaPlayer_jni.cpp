@@ -32,9 +32,6 @@ int my_thread( void *data )
 }
 extern "C" JNIEXPORT void JNICALL
 Java_ryan_1ffmpeg_1player_media_FFMediaPlayer__1native_1setup(JNIEnv *env, jobject jObject) {
-
-    SDL_CreateThread(my_thread, "my_thread", NULL);
-
     loadClass_FFMediaPlayer(env);
     FFMediaPlayer player;
     // weakRef这里为什么要用弱引用

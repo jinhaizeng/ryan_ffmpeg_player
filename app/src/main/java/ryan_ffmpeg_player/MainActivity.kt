@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult -> {
         }
-        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
